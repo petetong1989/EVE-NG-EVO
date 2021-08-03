@@ -268,6 +268,8 @@ function mainController($scope, $http, $location, $window, $uibModal, $log, $roo
             if (tempVal)
                 if (elementName.search('.unl') != -1) {
                     elementsuffixName = elementName.split("/").pop().replace(/\/|\.unl/ig, '')
+                } else {
+                    elementsuffixName = elementName.split("/").pop()
                 }
                 if (!confirm('Are you sure you want to delete this lab: ' + elementsuffixName)) return;
             console.log('delete file')
