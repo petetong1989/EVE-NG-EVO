@@ -266,9 +266,11 @@ function mainController($scope, $http, $location, $window, $uibModal, $log, $roo
         //Delete file//START
         if (thatis == 'File') {
             if (tempVal)
-                if (!confirm('Are you sure you want to delete this lab: ' + elementName)) return;
+                if (elementName.search('.unl') != -1) {
+                    elementsuffixName = elementName.split("/").pop().replace(/\/|\.unl/ig, '')
+                }
+                if (!confirm('Are you sure you want to delete this lab: ' + elementsuffixName)) return;
             console.log('delete file')
-            console.log(elementName)
             $http({
                     method: 'DELETE',
                     url: '/api/labs' + elementName
@@ -341,7 +343,7 @@ function mainController($scope, $http, $location, $window, $uibModal, $log, $roo
             }
 
             for (var filename in fileArray) {
-                filename = ($scope.path === '/') ? $scope.path + filename : $scope.path + '/' + filename + '.unl';
+                filename = ($scope.path === '/') ? $scope.path + filename + '.unl' : $scope.path + '/' + filename + '.unl';
                 $scope.deleteElement(filename, 'File')
             }
         } else return;
