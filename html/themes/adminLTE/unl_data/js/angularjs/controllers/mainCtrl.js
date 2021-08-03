@@ -266,11 +266,7 @@ function mainController($scope, $http, $location, $window, $uibModal, $log, $roo
         //Delete file//START
         if (thatis == 'File') {
             if (tempVal)
-                if (elementName.search('.unl') != -1) {
-                    var elementsuffixName = elementName.split("/").pop().replace(/\/|\.unl/ig, '')
-                } else {
-                    var elementsuffixName = elementName.split("/").pop()
-                }
+                var elementsuffixName = elementName.split("/").pop().replace(/\/|\.unl/ig, '')
                 if (!confirm('Are you sure you want to delete this lab: ' + elementsuffixName)) return;
             console.log('delete file')
             $http({
@@ -346,7 +342,7 @@ function mainController($scope, $http, $location, $window, $uibModal, $log, $roo
 
             for (var filename in fileArray) {
                 filename = ($scope.path === '/') ? $scope.path + filename + '.unl' : $scope.path + '/' + filename + '.unl';
-                $scope.deleteElement(filename, 'File')
+                $scope.deleteElement(filename, 'File', true)
             }
         } else return;
     }
